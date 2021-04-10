@@ -1,13 +1,11 @@
 package script.uebungen.java2d;
 
-import script.demos.java2d.Grafik_Objekte_2D;
-
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.*;
 
-public class Circles extends Frame{
+public class Uebung01 extends Frame{
 
         private static final long serialVersionUID = 1L;
         private int windowHeight;
@@ -17,7 +15,7 @@ public class Circles extends Frame{
          *
          * @param height  Dieser Wert sollte die Hoehe des Fensters angeben.
          */
-        Circles(int height)
+        Uebung01(int height)
         {
             //Ermoeglicht das Schliessen des Fensters
             addWindowListener(
@@ -58,21 +56,31 @@ public class Circles extends Frame{
             Ellipse2D.Double circle = new Ellipse2D.Double(10,80, 100, 50);
             g2d.draw(circle);
 
-            g2d.setStroke(new BasicStroke(3.0f));
-            g2d.setColor(new Color(0,0,0));
+            g2d.setStroke(new BasicStroke(3.0f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER,1.0f, new float[]{2.0f, 5.0f}, 0.0f));
+            g2d.setColor(new Color(2, 2, 246));
             Ellipse2D.Double circle2 = new Ellipse2D.Double(150,80, 100, 50);
             g2d.draw(circle2);
+            g2d.setStroke(new BasicStroke(3.0f));
 
-            g2d.setColor(new Color(0,0,0));
+            g2d.setColor(new Color(0,0,200));
             Ellipse2D.Double circle3 = new Ellipse2D.Double(300,80, 100, 50);
+            g2d.fill(circle3);
             g2d.draw(circle3);
 
-            g2d.setColor(new Color(0,0,0));
-            Ellipse2D.Double circle4 = new Ellipse2D.Double(100,0, 100, 50);
-            g2d.draw(circle4);
+            //Definiere eine Rotation.
+            AffineTransform rotation = new AffineTransform();
+            rotation.setToRotation(Math.PI/4);
 
-            g2d.setColor(new Color(0,0,0));
+            g2d.setColor(new Color(210, 8, 224));
+            Ellipse2D.Double circle4 = new Ellipse2D.Double(100,-150, 100, 50);
+            g2d.draw(rotation.createTransformedShape(circle4));
+
+            g2d.setColor(new Color(130, 125, 125));
             Ellipse2D.Double circle5 = new Ellipse2D.Double(250,0, 100, 50);
+            Rectangle2D.Double rect = new Rectangle2D.Double(248, 25, 45, 26);
+
+            g2d.clip(rect);
+            g2d.fill(circle5);
             g2d.draw(circle5);
 
 
@@ -85,7 +93,7 @@ public class Circles extends Frame{
         public static void main(String[] argv)
         {
             int height = 400;
-            Circles f = new Circles(height);
+            Uebung01 f = new Uebung01(height);
             f.setTitle("Uebung Kreise");
             f.setSize(500,height);
             f.setVisible(true);
